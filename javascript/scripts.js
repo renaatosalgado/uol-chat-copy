@@ -5,9 +5,30 @@ let LAST_TIME;
 
 function startChat() {
   loadMessages();
-  getUsers();
 
   setInterval(loadMessages, 3000);
+  setInterval(validateStatus, 5000);
+}
+
+function enterRoom() {
+  NAME = prompt("Qual o seu nome?");
+
+  const promise = axios.post(`${BASE_URL}/participants`, {
+    name: NAME,
+  });
+
+  promise.then(startChat);
+  promise.catch(reloadPage);
+}
+
+function validateStatus() {
+  axios.post(`${BASE_URL}/status`, {
+    name: NAME,
+  });
+}
+
+function reloadPage () {
+	window.location.reload();
 }
 
 function loadMessages() {
@@ -49,7 +70,7 @@ function renderMessages(answer) {
             </li>`;
     }
 
-    const lastMessage = resposta.data[resposta.data.length - 1].time;
+    const lastMessage = answer.data[answer.data.length - 1].time;
 
     scrollEndChat(lastMessage);
   }
@@ -64,3 +85,5 @@ function renderMessages(answer) {
     }
   }
 }
+
+enterRoom();
