@@ -1,13 +1,23 @@
-let BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/uol";
+let BASE_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v4/uol";
 
 let NAME;
 let LAST_TIME;
+let RECEIVER = "Todos";
+let MESSAGE_TYPE = "message";
 
 function startChat() {
   loadMessages();
 
   setInterval(loadMessages, 3000);
   setInterval(validateStatus, 5000);
+
+  document.addEventListener("keyup", sendMessageKeyboard)
+}
+
+function sendMessageKeyboard(event) {
+  if(event.key === "Enter") {
+    sendMessage();
+  }
 }
 
 function enterRoom() {
@@ -27,8 +37,8 @@ function validateStatus() {
   });
 }
 
-function reloadPage () {
-	window.location.reload();
+function reloadPage() {
+  window.location.reload();
 }
 
 function loadMessages() {
@@ -84,6 +94,24 @@ function renderMessages(answer) {
       LAST_TIME = lastMessage;
     }
   }
+}
+
+function sendMessage() {
+  const input = document.querySelector(".input-message");
+
+  const text = input.value;
+  const message = {
+    to: RECEIVER,
+    from: NAME,
+    text: text,
+    type: MESSAGE_TYPE,
+  }
+
+  input.value = "";
+
+  const promise = axios.post(`${BASE_URL}/messages`, message);
+  promise.then(loadMessages);
+  promise.catch(reloadPage);
 }
 
 enterRoom();
