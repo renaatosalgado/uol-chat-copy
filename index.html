@@ -22,27 +22,7 @@
   
     <main>
       <ul class="messages-container">
-        <li class="in-out">
-          <span class="time">(20:03:01)</span>
-          <strong>Fulano</strong>
-          <span> para </span>
-          <strong>Cicrano: </strong>
-          <span>Testando</span>
-        </li>
-        <li class="talk-public">
-          <span class="time">(20:03:01)</span>
-          <strong>Fulano</strong>
-          <span> para </span>
-          <strong>Cicrano: </strong>
-          <span>Testando</span>
-        </li>
-        <li class="talk-private">
-          <span class="time">(20:03:01)</span>
-          <strong>Fulano</strong>
-          <span> reservadamente para </span>
-          <strong>Cicrano: </strong>
-          <span>Testando</span>
-        </li>
+        
       </ul>
     </main>
   
@@ -63,11 +43,13 @@
       </ul>
       <h3 class="title-menu">Escolha a visibilidade:</h3>
       <ul class="visibilities">
-        <li class="visibility-public selected" onclick="selectVisibility(this, 'message')">
+        <li data-identifier="visibility"
+        class="visibility-public selected" onclick="selectVisibility(this, 'message')">
           <ion-icon name="lock-open"></ion-icon>Público<ion-icon class="check" name="checkmark-outline">
           </ion-icon>
         </li>
-        <li class="visibility-private" onclick="selectVisibility(this, 'private_message')">
+        <li data-identifier="visibility"
+        class="visibility-private" onclick="selectVisibility(this, 'private_message')">
           <ion-icon name="lock-closed"></ion-icon>Reservadamente<ion-icon class="check" name="checkmark-outline">
           </ion-icon>
         </li>

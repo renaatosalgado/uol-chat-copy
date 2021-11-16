@@ -125,7 +125,7 @@ function renderUsers(answer) {
     userClass = "selected";
   }
 
-  usersList.innerHTML = `<li class="visibility-public ${userClass}" onclick="selectReceiver(this)">
+  usersList.innerHTML = `<li data-identifier="visibility" class="visibility-public ${userClass}" onclick="selectReceiver(this)">
   <ion-icon name="people"></ion-icon><span class="name">Todos</span><ion-icon class="check" name="checkmark-outline">
   </ion-icon>
   </li>`;
@@ -136,7 +136,7 @@ function renderUsers(answer) {
     } else {
       userClass = "";
     }
-    usersList.innerHTML += `<li class="visibility-public ${userClass}" onclick="selectReceiver(this)">
+    usersList.innerHTML += `<li data-identifier="visibility" class="visibility-public ${userClass}" onclick="selectReceiver(this)" data-identifier="participant">
      <ion-icon name="person-circle"></ion-icon>
      <span class="name">${answer.data[i].name}</span><ion-icon class="check" name="checkmark-outline">
      </ion-icon>
